@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+	<a class="home-link" href="/" style="color: black;"><h1 style="font-family: Consolas, monospace; text-shadow: -6px 4px #cdcdcd" class="center">roombox</h1></a>
+	<h5 class="header center valign light">enter your room code</h5>
+	<div class="row valign center">
+			<div class="row center">
+				<div class="input-field col s12 center">
+				        
+				    <form action="." method="post">
+					<input id="room_code_entry" class="dark-text-box center" type="text" name="q"></form>
+					<label for="room_code_entry">Room code</label>
+					<button class="btn-large waves-effect waves-light blue-grey darken-3" type="submit" value="Join" name="action">Join</button>
+					</form>
+				</div>
+			</div>
+	</div>
+</div>
+{% endblock %}

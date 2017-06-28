@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container valign">
+        <div class="row center">
+		<h1 style="font-family: Consolas, monospace; text-shadow: -6px 4px #cdcdcd" class="valign">roombox</h1>
+	</div>
+	<div class="row center">
+		<h5 class="header col s12 valign light">become the life of the party</h5>
+	</div>
+	<div class="row center">
+		<a id="create-room-button" class="btn-large waves-effect waves-light blue-grey darken-3 valign" href="/spauth">{% if session.uuid_id %} create a new room {% else %} connect to spotify{% endif %}</a>
+	</div>
+	<div class="row center">
+		<h5 class="header col s12 valign light">already got a room code?</h5>
+	</div>
+	<div class="row center">
+		<form method="post" action="/join" class="valign">
+			{{ form.csrf_token }}
+			<div class="col s4"></div><div class="col s4">
+			<input placeholder="Enter it here" id="room-code-entry" class="center" type="text" name="room_code"></input>
+			</div><div class="col s4"></div><div class="col s12">
+			<button class="btn-large waves-effect waves-light blue-grey darken-3" type="submit" value="Join" name="action">Join</button>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<script>
+function copy_link()
+{
+    var text_area = document.createElement("textarea");
+    text_area.style.position = 'fixed';
+    text_area.style.top = 0;
+    text_area.style.left = 0;
+    text_area.style.width = '2em';
+    text_area.style.height = '2em';
+    text_area.style.padding = 0;
+    text_area.style.border = 'none';
+    text_area.style.outline = 'none';
+    text_area.style.boxShadow = 'none';
+    text_area.style.background = 'transparent';
+    text_area.value = "http://hack.monotron.me/room/{{ room.uuid_id }}";
+    document.body.appendChild(text_area);
+    text_area.select();
+    try {
+	var done = document.execCommand('copy');
+	if(copy) {
+	    Materialize.toast("Copied the link to your clipboard.", 5000);
+	} else {
+	    Materialize.toast("Failed to copy the link. Perhaps your browser needs updating.", 5000);
+	}
+	console.log('Copying the text was ' + (done) ? "successful" : "unsuccessful");
+    } catch (err) {
+	console.log('An error occurred while copying the text.');
+    }
+    document.body.removeChild(text_area);
+}
+</script>
+
+<div class="container">
+
+    <a class="home-link" href="/" style="color: black;"><h1 style="font-family: Consolas, monospace; text-shadow: -6px 4px #cdcdcd;" class="center">roombox</h1></a>
+    <div class="row valign center">
+        {% if room %}
+        <h5 class="header col s12 valign light">you're in room {{ room.password }}</h5>
+	{% if session.uuid_id == room.uuid_id %} <p><strong>you're the host - </strong>to get started, open spotify and play the playlist {{ room.password }} - make sure shuffle mode is off</p> <p>share the code {{ room.password }}, or <a onclick="copy_link()" style="color: black; text-decoration: underline;" id="copylink">click here to copy</a></a>{% else %} hosted by user {{ room.username }} {% endif %}
+    {% if time > room.token_expiry %} <p><strong>token has expired; please create a new room</strong></p> {% endif %}
+	<form action="/room/{{ room.uuid_id  }}/search" method="get">
+        <div class="col s2"></div>
+        <span class="input-field inline col s8 center">
+            <input placeholder="Type track name here" id="search" type="text" class="validate" name="q">
+            <label for="search" data-error="wrong" data-success="right">Add songs here</label>
+        </span>
+        </form>
+        <div class="col s2"></div>
+        <div class="col s12">
+
+        {% if s %}
+        <ul class="collection">
+        {% for item in s %}
+            <li class="collection-item">
+
+            {% for artist in item.artists %} <strong>{{ artist.name }},</strong>{% endfor %} -     {{ item.name }}
+            <a href="add/{{item.id}}" class="secondary-content"><i class="material-icons">add to queue</i></a></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% if room.tracks %}
+        
+	Songs currently in the queue:
+	<ul class="collection">
+        {% for track in room.tracks %}
+            <li class="collection-item">
+		<strong>{{ track.artist }}</strong> - {{ track.name }}
+	    </li>
+        {% endfor %}
+	</ul>
+        {% else %}
+    at the moment, there's nothing in the queue. add songs using the search bar above.
+    	{% endif %}
+        </div>
+        {% else %}
+        <h5 class="header col s12 valign light">room is not found :(</h5>
+	{% endif %}
+
+    </div>
+</div>
+{% endblock %}
+

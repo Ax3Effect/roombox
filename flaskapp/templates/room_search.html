@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <h1 style="font-family: Consolas, monospace; text-shadow: -6px 4px #cdcdcd" class="center">roombox</h1>
+    <div class="row valign center">
+
+        <h5 class="header col s12 valign light">search here</h5>
+        <form action="search" method="get">
+            <input placeholder="Type track name here" id="search" type="text" class="validate" name="q">
+        </form>
+
+        {% if s %}
+        <ul class="collection">
+        {% for item in s %}
+            <li class="collection-item">
+
+            {% for artist in item.artists %} <strong>{{ artist.name }},</strong>{% endfor %} -     {{ item.name }}
+            <a href="add/{{item.id}}" class="secondary-content"><i class="material-icons">add to queue</i></a></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+
+    </div>
+</div>
+{% endblock %}
+

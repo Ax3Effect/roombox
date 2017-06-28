@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<script
+			  src="https://code.jquery.com/jquery-3.1.1.min.js"
+			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			  crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+       	        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta charset="utf-8">
+		<meta content="roombox: the life of the party" name=description>
+		<meta content="ax3, monotron" name=author>
+		<style>
+		.dark-text-box label {
+			color: #37474f;
+		}
+
+		.dark-text-box input[type=text]:focus + label {
+			color: #37474f;
+		}
+
+		.dark-text-box input[type=text]:focus {
+			border-bottom: 1px solid #37474f;
+			box-shadow: 0 1px 0 0 #37474f;
+		}
+
+		.home-link a:hover, .home-link a:active {
+			color: #111111;
+		}
+
+		.home-link a:link, .home-link a:visited {
+			color: black;
+		}
+
+		</style>
+		<title>{% block page_title %}{% if title %} {{ title }} {% else %}roombox &bull; become the life of the party{% endif %}{% endblock %}</title>
+	</head>
+	<body>
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		  {% for message in messages %}
+			<script>Materialize.toast('{{message}}', 4000);</script>
+		  {% endfor %}
+		{% endif %}
+		{% endwith %}
+		{% block content %}{% endblock %}
+	</body>
+</html>

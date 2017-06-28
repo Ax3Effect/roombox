@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="valign-center">
+    <h1 class="header center valign">roombox</h1>
+    <div class="row valign center">
+        <h5 class="header col s12 valign light">connected to spotify using account {{ name }}</h5>
+	<p>you can connect to this room with the code {{ room_password }}</p>
+    </div>
+</div>
+{% endblock %}
+
