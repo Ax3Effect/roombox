@@ -1,4 +1,4 @@
-# roombpo
+# roombox
 ## Inspiration
 The original idea for roombox came from a common frustration at parties - everyone loves Spotify, but why doesn't it allow other people to queue songs in a playlist? Eventually, we became fed up with constantly queueing songs for others, and decided to build roombox, a simple room-based queueing system for Spotify.
 
